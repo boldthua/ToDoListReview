@@ -1,0 +1,36 @@
+﻿<Window x:Class="ToDoListReview.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoListReview"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <StackPanel >
+        <StackPanel  Orientation="Horizontal">
+            <Label >代辦事項</Label>
+            <TextBox x:Name ="Time" Width="100" Text="{Binding Time}" Margin ="2"></TextBox >
+            <TextBox x:Name ="Expire" Width="100" Text="{Binding Expire}" Margin ="2"></TextBox>
+            <TextBox x:Name ="Title" Width="150" Text="{Binding Title}" Margin ="2"></TextBox>
+            <TextBox x:Name ="Description" Width="300" Text="{Binding Description}" Margin ="2"></TextBox>
+            <Button Click="Button_Click">新增</Button>
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding toDoList}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding isCompleted}"></CheckBox>
+                        <Label Content="{Binding doneOrNot}"></Label>
+                        <Label Content="{Binding time}"></Label>
+                        <Label Content="{Binding expire}"></Label>
+                        <Label x:Name="title" Content="{Binding title}"></Label>
+                        <Label x:Name="description" Content="{Binding description}"></Label>
+                        <Button Content="刪除" Click="Delete_Click"></Button>
+                    </StackPanel>
+                </DataTemplate>
+
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</Window>
