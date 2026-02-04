@@ -30,20 +30,11 @@ namespace ToDoListReview
             DataContext = viewModel;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            Task task = new Task(Time.Text, Expire.Text, Title.Text, Description.Text);
-            viewModel.toDoList.Add(task);
+            //  viewModel.toDoList.Add(new Task(viewModel.Title));
+            // viewModel.AddTodo();
         }
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("確定刪除？", "刪除提示", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No)
-                return;
-            Button button = (Button)sender;
-            //StackPanel panel = button.Parent as StackPanel;
-            Task task = (Task)button.DataContext;
-            viewModel.toDoList.Remove(task);
-        }
+
     }
 }

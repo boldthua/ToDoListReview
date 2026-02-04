@@ -8,25 +8,42 @@
         Title="MainWindow" Height="450" Width="800">
 
     <StackPanel >
-        <StackPanel  Orientation="Horizontal">
-            <Label >代辦事項</Label>
-            <TextBox x:Name ="Time" Width="100" Text="{Binding Time}" Margin ="2"></TextBox >
-            <TextBox x:Name ="Expire" Width="100" Text="{Binding Expire}" Margin ="2"></TextBox>
-            <TextBox x:Name ="Title" Width="150" Text="{Binding Title}" Margin ="2"></TextBox>
-            <TextBox x:Name ="Description" Width="300" Text="{Binding Description}" Margin ="2"></TextBox>
-            <Button Click="Button_Click">新增</Button>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="開始日期" HorizontalAlignment="Center" Margin="2"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="截止日期" HorizontalAlignment="Center" Margin="2"/>
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="標題" HorizontalAlignment="Center" Margin="2"/>
+            <TextBlock Grid.Row="0" Grid.Column="4" Text="內容" HorizontalAlignment="Center" Margin="2"/>
+
+            <Label   Grid.Row="1" Grid.Column="0" Content="代辦事項" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Width="100" Text="{Binding Time}" Margin="2"/>
+            <TextBox Grid.Row="1" Grid.Column="2" Width="100" Text="{Binding Expire}" Margin="2"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Title}" Margin="2"/>
+            <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding Description}" Margin="2"/>
+            <Button  Grid.Row="1" Grid.Column="5" Content="新增" Command="{Binding AddTaskCommand}" CommandParameter="{Binding}" Padding="10,0" Margin="2"/>
+        </Grid>
         <ItemsControl ItemsSource="{Binding toDoList}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox IsChecked="{Binding isCompleted}"></CheckBox>
+                        <CheckBox IsChecked="{Binding IsCompleted}"></CheckBox>
                         <Label Content="{Binding doneOrNot}"></Label>
                         <Label Content="{Binding time}"></Label>
                         <Label Content="{Binding expire}"></Label>
                         <Label x:Name="title" Content="{Binding title}"></Label>
                         <Label x:Name="description" Content="{Binding description}"></Label>
-                        <Button Content="刪除" Click="Delete_Click"></Button>
+                        <Button Content="刪除" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></Button>
                     </StackPanel>
                 </DataTemplate>
 

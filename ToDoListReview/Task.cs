@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ToDoListReview
 {
-    public class Task
+    public class Task : INotifyPropertyChanged
     {
-        public bool isCompleted { get; set; } = false;
+        private bool isCompleted = false;
         public string doneOrNot => isCompleted ? "已完成" : "未完成";
         public string time { get; set; }
         public string expire { get; set; }
         public string title { get; set; }
         public string description { get; set; }
+
+
+        public bool IsCompleted
+        {
+            get { return isCompleted; }
+            set
+            {
+                isCompleted = value;
+                OnPropertyChanged(); // 此行可省略，因為綁定的IsCompleted沒有UI需要刷新。
+                OnPropertyChanged(nameof(doneOrNot));
+            }
+        }
 
         public Task(string time, string expire, string title, string description)
         {
@@ -23,5 +38,11 @@ namespace ToDoListReview
             this.description = description;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string name = "")
+        {
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }
