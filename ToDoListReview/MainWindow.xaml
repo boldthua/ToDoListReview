@@ -43,7 +43,7 @@
                         <Label Content="{Binding expire}"></Label>
                         <Label x:Name="title" Content="{Binding title}"></Label>
                         <Label x:Name="description" Content="{Binding description}"></Label>
-                        <Button Content="刪除" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></Button>
+                        <Button Content="刪除" Visibility="{Binding visibility}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></Button>
                     </StackPanel>
                 </DataTemplate>
 

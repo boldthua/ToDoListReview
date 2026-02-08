@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ToDoListReview
@@ -13,6 +14,7 @@ namespace ToDoListReview
     {
         private bool isCompleted = false;
         public string doneOrNot => isCompleted ? "已完成" : "未完成";
+        public Visibility visibility => isCompleted ? Visibility.Visible : Visibility.Hidden;
         public string time { get; set; }
         public string expire { get; set; }
         public string title { get; set; }
@@ -25,7 +27,7 @@ namespace ToDoListReview
             set
             {
                 isCompleted = value;
-                OnPropertyChanged(); // 此行可省略，因為綁定的IsCompleted沒有UI需要刷新。
+                OnPropertyChanged(nameof(visibility)); 
                 OnPropertyChanged(nameof(doneOrNot));
             }
         }

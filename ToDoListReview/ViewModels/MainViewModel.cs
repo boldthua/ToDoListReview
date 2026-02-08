@@ -8,15 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ToDoListReview.Models;
+using ToDoListReview.Presenter;
+using static ToDoListReview.Contract.MainContract;
 
 namespace ToDoListReview
 {
-    internal class MainViewModel : INotifyPropertyChanged
+    internal class MainViewModel : INotifyPropertyChanged , IMainView
     {
         private string _time;
         public string Expire { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        public MainPresenter presenter { get; set; }
 
         public MainViewModel()
         {
@@ -47,11 +52,10 @@ namespace ToDoListReview
 
         public void AddTask()
         {
-            toDoList.Add(new Task(Time, Expire, Title, Description));
-            Title = "";
-            Expire = "";
-            Time = "";
-            Description = "";
+            TaskDTO task = new TaskDTO(Time, Expire, Title, Description);
+            presenter.CreateTask(task);
+            //toDoList.Add(new Task(Time, Expire, Title, Description));
+            
         }
         public void DeleteTask(Task task)
         {
@@ -59,6 +63,12 @@ namespace ToDoListReview
             if (result == MessageBoxResult.No)
                 return;
             toDoList.Remove(task);
+        }
+
+
+        public void RenderDatas(List<TaskDTO> tasks)
+        {
+            throw new NotImplementedException();
         }
     }
 

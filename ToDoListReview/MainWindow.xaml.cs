@@ -30,11 +30,5 @@ namespace ToDoListReview
             DataContext = viewModel;
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            //  viewModel.toDoList.Add(new Task(viewModel.Title));
-            // viewModel.AddTodo();
-        }
-
     }
 }
