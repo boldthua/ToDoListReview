@@ -59,7 +59,7 @@
     <Compile Include="Models\TaskDTO.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\TaskRepository.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="ViewModels\Task.cs" />

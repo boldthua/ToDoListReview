@@ -8,17 +8,24 @@ using ToDoListReview.Models;
 
 namespace ToDoListReview.Repository
 {
-    internal class Repository : IRepository
+    internal class TaskRepository : IRepository
     {
-        public List<TaskDTO> toDoList {  get; set; }
+
+        public List<TaskDTO> toDoList = new List<TaskDTO>();
+
+        public TaskRepository() { }
         public void AddTask(TaskDTO task)
         {
             toDoList.Add(task);
         }
 
-        public void RemoveTask(string name)
+        public void RemoveTask(string title)
         {
-            throw new NotImplementedException();
+
+            toDoList.Remove(toDoList.First(x => x.title == title));
         }
+
+        public List<TaskDTO> GetDetas()
+        { return toDoList; }
     }
 }

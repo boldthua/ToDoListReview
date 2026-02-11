@@ -14,17 +14,18 @@ using static ToDoListReview.Contract.MainContract;
 
 namespace ToDoListReview
 {
-    internal class MainViewModel : INotifyPropertyChanged , IMainView
+    internal class MainViewModel : INotifyPropertyChanged, IMainView
     {
         private string _time;
         public string Expire { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } // TitleTxt.Text = "Hello" / Title = "Hello"
         public string Description { get; set; }
 
-        public MainPresenter presenter { get; set; }
+        public IMainPresenter presenter { get; set; }
 
         public MainViewModel()
         {
+            presenter = new MainPresenter(this);
             DeleteCommand = new RelayCommand<Task>(DeleteTask);
             AddTaskCommand = new RelayCommand(AddTask);
         }
@@ -54,21 +55,27 @@ namespace ToDoListReview
         {
             TaskDTO task = new TaskDTO(Time, Expire, Title, Description);
             presenter.CreateTask(task);
-            //toDoList.Add(new Task(Time, Expire, Title, Description));
-            
         }
         public void DeleteTask(Task task)
         {
             MessageBoxResult result = MessageBox.Show("確定刪除？", "刪除提示", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.No)
                 return;
-            toDoList.Remove(task);
+            string title = task.title;
+            presenter.RemoveTask(title);
+
         }
 
 
         public void RenderDatas(List<TaskDTO> tasks)
         {
-            throw new NotImplementedException();
+            toDoList.Clear();
+            foreach (TaskDTO task in tasks)
+            {
+                Task UITask = new Task(task.time, task.expire, task.title, task.description);
+                UITask.IsCompleted = task.isCompleted;
+                toDoList.Add(UITask);
+            }
         }
     }
 

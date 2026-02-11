@@ -27,7 +27,7 @@ namespace ToDoListReview
             set
             {
                 isCompleted = value;
-                OnPropertyChanged(nameof(visibility)); 
+                OnPropertyChanged(nameof(visibility));
                 OnPropertyChanged(nameof(doneOrNot));
             }
         }
@@ -44,7 +44,7 @@ namespace ToDoListReview
 
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

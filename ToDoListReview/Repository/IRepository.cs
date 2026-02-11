@@ -10,6 +10,7 @@ namespace ToDoListReview.Repository
     internal interface IRepository
     {
         void AddTask(TaskDTO task);
-        void RemoveTask(string name);
+        void RemoveTask(string title);
+        List<TaskDTO> GetDetas();
     }
 }
